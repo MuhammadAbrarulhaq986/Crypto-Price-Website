@@ -5,6 +5,7 @@ import { CryptoCard } from "../components/CryptoCard.jsx";
 export const Home = () => {
   const [cryptoList, setCryptoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [viewMode, setViewMode] = useState("grid");
 
   useEffect(() => {
     fetchCryptoData();
@@ -24,6 +25,24 @@ export const Home = () => {
 
   return (
     <div className="app">
+      <div className="controls">
+        <div className="filter-group"></div>
+        <div className="view-toggle">
+          <button
+            className={viewMode === "grid" ? "active" : ""}
+            onClick={() => setViewMode("grid")}
+          >
+            Grid
+          </button>
+          <button
+            className={viewMode === "list" ? "active" : ""}
+            onClick={() => setViewMode("list")}
+          >
+            List
+          </button>
+        </div>
+      </div>
+
       {isLoading ? (
         <div className="loading">
           <div className="spinner" />
