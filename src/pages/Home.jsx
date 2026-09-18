@@ -49,7 +49,7 @@ export const Home = () => {
           <p>Loading crypto data...</p>
         </div>
       ) : (
-        <div className="crypto-container">
+        <div className={`crypto-container ${viewMode}`}>
           {cryptoList.map((crypto, key) => (
             <CryptoCard crypto={crypto} key={key} />
           ))}

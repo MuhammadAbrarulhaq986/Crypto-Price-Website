@@ -1,26 +1,10 @@
-/* --- Global Styles & Layout --- */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
-  background-color: #060606;
-  color: #f3f3f3;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  background-color: black;
 }
-
+/* --- Main App Container --- */
 .app {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1250px;
   background-color: #121212;
   border: 2px solid rgba(176, 38, 255, 0.25);
   border-radius: 24px;
@@ -29,23 +13,23 @@ body {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  margin: 0 auto;
 }
 
-/* --- Controls & View Toggle Buttons --- */
+/* --- Controls & Toggle --- */
 .controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
-  margin-bottom: 5px;
 }
 
 .view-toggle {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   background-color: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 6px;
+  padding: 4px;
   border-radius: 12px;
 }
 
@@ -53,9 +37,9 @@ body {
   background: transparent;
   border: none;
   color: #a0a0a0;
-  padding: 8px 18px;
+  padding: 6px 16px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -68,75 +52,48 @@ body {
 .view-toggle button.active {
   background-color: #b026ff;
   color: #ffffff;
-  box-shadow: 0 0 12px rgba(176, 38, 255, 0.5);
+  box-shadow: 0 0 10px rgba(176, 38, 255, 0.4);
 }
 
-/* --- Loading Spinner Component --- */
-.loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  min-height: 300px;
-  color: #a0a0a0;
-  font-size: 1rem;
-}
-
-.spinner {
-  width: 45px;
-  height: 45px;
-  border: 4px solid rgba(176, 38, 255, 0.15);
-  border-top-color: #b026ff;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* --- Crypto Container (Grid vs List Handler via dynamic class or state layout) --- */
-.crypto-container {
+/* --- Dynamic View Modes --- */
+.crypto-container.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns like the image */
   gap: 20px;
   width: 100%;
 }
 
-/* If you handle list view layout mapping via a parent class change e.g. .crypto-container.list-view */
-.crypto-container.list-view {
+.crypto-container.list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  width: 100%;
 }
 
-/* --- Crypto Card Component --- */
+/* --- Crypto Card (Matches image layout precisely) --- */
 .crypto-card {
   display: flex;
   flex-direction: column;
-  background-color: #1a1a1a;
-  border: 1px solid rgba(176, 38, 255, 0.15);
-  border-radius: 16px;
-  padding: 20px;
-  gap: 16px;
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 22px;
+  gap: 20px;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .crypto-card:hover {
-  border-color: rgba(176, 38, 255, 0.6);
-  background-color: #202020;
-  box-shadow: 0 0 18px rgba(176, 38, 255, 0.2);
+  border-color: rgba(176, 38, 255, 0.5);
+  background-color: #1c1c1c;
+  box-shadow: 0 0 16px rgba(176, 38, 255, 0.15);
   transform: translateY(-2px);
 }
 
 .crypto-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .crypto-info {
@@ -146,103 +103,106 @@ body {
 }
 
 .crypto-info img {
-  width: 38px;
-  height: 38px;
+  width: 86px;
+  height: 86px;
   object-fit: contain;
 }
 
 .crypto-info h3 {
-  font-size: 1.1rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 2px;
 }
 
 .crypto-info .symbol {
-  font-size: 0.8rem;
+  font-size: 1.7rem;
   font-weight: 600;
-  color: #999999;
+  color: #888888;
   text-transform: uppercase;
   display: inline-block;
   margin-right: 6px;
 }
 
 .crypto-info .rank {
-  font-size: 0.7rem;
+  font-size: 1.7rem;
   font-weight: 700;
   color: #ffffff;
-  background-color: rgba(176, 38, 255, 0.2);
-  border: 1px solid rgba(176, 38, 255, 0.4);
+  background-color: rgba(176, 38, 255, 0.15);
+  border: 1px solid rgba(176, 38, 255, 0.3);
   padding: 1px 6px;
   border-radius: 6px;
 }
 
 .crypto-price {
+  font-size: 1.7rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 12px 0;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .crypto-price .price {
-  font-size: 1.25rem;
+  font-size: 1.7rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.02em;
 }
 
-/* --- Price Change Badge (Green / Red Dynamic Styling) --- */
+/* --- Price Change Badge --- */
 .change {
-  font-size: 0.9rem;
+  font-size: 1.85rem;
   font-weight: 700;
   padding: 4px 10px;
   border-radius: 8px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 4px;
+  width: fit-content;
 }
 
 .change.positive {
-  background-color: rgba(0, 230, 118, 0.15);
+  background-color: rgba(0, 230, 118, 0.12);
   color: #00e676;
-  border: 1px solid rgba(0, 230, 118, 0.3);
-  box-shadow: 0 0 10px rgba(0, 230, 118, 0.15);
+  border: 1px solid rgba(0, 230, 118, 0.25);
 }
 
 .change.negative {
-  background-color: rgba(255, 23, 68, 0.15);
+  background-color: rgba(255, 23, 68, 0.12);
   color: #ff1744;
-  border: 1px solid rgba(255, 23, 68, 0.3);
-  box-shadow: 0 0 10px rgba(255, 23, 68, 0.15);
+  border: 1px solid rgba(255, 23, 68, 0.25);
 }
 
-/* --- Crypto Additional Stats Grid --- */
+/* --- Bottom Market Stats (Side-by-side inside card) --- */
 .crypto-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  font-size: 1.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 14px;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  background-color: #141414;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  gap: 3px;
+}
+
+.stat:last-child {
+  text-align: right;
 }
 
 .stat-label {
-  font-size: 0.75rem;
-  color: #888888;
-  font-weight: 500;
+  font-size: 1.85rem;
+  font-size: 0.65rem;
+  color: #777777;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .stat-value {
   font-size: 0.9rem;
-  color: #e0e0e0;
+  color: #dddddd;
   font-weight: 600;
 }
