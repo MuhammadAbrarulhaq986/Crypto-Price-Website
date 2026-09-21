@@ -13,7 +13,7 @@ export const fetchCryptos = async () => {
 
 export const fetchCoinData = async (id) => {
   const response = await fetch(
-    `${BASE_URL}/coins/${id}markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`,
+    `${BASE_URL}/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`,
   );
 
   if (!response.ok) {
