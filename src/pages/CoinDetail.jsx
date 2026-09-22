@@ -1,22 +1,52 @@
 import { useNavigate, useParams } from "react-router";
-import { fetchCoinData } from "../api/coinGecko.js";
+import { fetchChartData, fetchCoinData } from "../api/coinGecko.js";
 import { useEffect, useState } from "react";
-import { formatPrice } from "../utils/formatter.js";
+import { formatMarketCap, formatPrice } from "../utils/formatter.js";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 export const CoinDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [coin, setCoin] = useState(null);
+  const [chartData, setChartData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     loadCoinData();
+    loadChartData();
   }, [id]);
 
   const loadCoinData = async () => {
     try {
       const data = await fetchCoinData(id);
       setCoin(data);
+    } catch (err) {
+      console.error("Error fetching crypto: ", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loadChartData = async () => {
+    try {
+      const data = await fetchChartData(id);
+
+      const formattedData = data.prices.map((price) => ({
+        time: new Date(price[0]).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        }),
+        price: price[1].toFixed(2),
+      }));
+      setChartData(formattedData);
     } catch (err) {
       console.error("Error fetching crypto: ", err);
     } finally {
@@ -82,9 +112,92 @@ export const CoinDetail = () => {
               {isPositive ? "⇡" : "⇣"} {Math.abs(priceChange).toFixed(2)}%
             </span>
           </div>
-          <div></div>
+          <div className="price-ranges">
+            <div className="price-range">
+              <span className="range-label">24h High</span>
+              <span className="range-value">
+                {formatPrice(coin.market_data.high_24h.usd)}
+              </span>
+            </div>
+            <div className="price-range">
+              <span className="range-label">24h Low</span>
+              <span className="range-value">
+                {formatPrice(coin.market_data.low_24h.usd)}
+              </span>
+            </div>
+          </div>
+          <div className="chart-section">
+            <h3>Price Chart (7 Days)</h3>
+            <ResponsiveContainer width="100%" height={400}>
+              <LineChart data={chartData}>
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="rgba(174, 0, 255, 0.49)"
+                />
+                <XAxis
+                  dataKey="time"
+                  stroke="#af9caf"
+                  style={{ fontSize: "12px" }}
+                />
+                <YAxis
+                  stroke="#af9caf"
+                  style={{ fontSize: "12px" }}
+                  domain={["auto", "auto"]}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "rgba(18, 12, 21, 0.95)",
+                    border: "1px solid rgba(223, 223, 223, 0.1)",
+                    borderRadius: "8px",
+                    color: "#e0e0e0",
+                  }}
+                />
+
+                <Line
+                  type="monotone"
+                  dataKey="price"
+                  stroke="#d3ade6"
+                  strokeWidth={2}
+                  dot={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="stats-grid">
+          <div className="stat-card">
+            <span className="stat-label">Market Cap</span>
+            <span className="stat-value">
+              ${formatMarketCap(coin.market_data.market_cap.usd)}
+            </span>
+          </div>
+
+          <div className="stat-card">
+            <span className="stat-label">Volume (24)</span>
+            <span className="stat-value">
+              ${formatMarketCap(coin.market_data.total_volume.usd)}
+            </span>
+          </div>
+
+          <div className="stat-card">
+            <span className="stat-label">Circulating Supply</span>
+            <span className="stat-value">
+              {coin.market_data.circulating_supply?.toLocaleString() || "N/A"}
+            </span>
+          </div>
+
+          <div className="stat-card">
+            <span className="stat-label">Total Supply</span>
+            <span className="stat-value">
+              {coin.market_data.total_supply?.toLocaleString() || "N/A"}
+            </span>
+          </div>
         </div>
       </div>
+      <footer className="footer">
+        <p>Data provided by CoinGEcko API • Updated every 30 seconds </p>
+      </footer>
     </div>
   );
 };

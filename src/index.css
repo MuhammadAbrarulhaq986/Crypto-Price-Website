@@ -523,3 +523,243 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* --- Coin Detail Page Layout --- */
+.coin-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+}
+
+/* --- Back Button Styling in Header --- */
+.header-content button {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border: 1px solid rgba(176, 38, 255, 0.4);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(176, 38, 255, 0.15);
+}
+
+.header-content button:hover {
+  background-color: #b026ff;
+  border-color: #b026ff;
+  box-shadow: 0 0 15px rgba(176, 38, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+/* --- Coin Header Section --- */
+.coin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 20px 24px;
+}
+
+.coin-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.coin-title img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.coin-title h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.coin-title .symbol {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #888888;
+  text-transform: uppercase;
+}
+
+.coin-header .rank {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: rgba(176, 38, 255, 0.15);
+  border: 1px solid rgba(176, 38, 255, 0.35);
+  padding: 6px 12px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(176, 38, 255, 0.1);
+}
+
+/* --- Price & Range Section --- */
+.coin-price-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.current-price {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.current-price .price {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+/* --- Change Badge (Green / Red) --- */
+.change-badge {
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.change-badge.positive {
+  background-color: rgba(0, 230, 118, 0.12);
+  color: #00e676;
+  border: 1px solid rgba(0, 230, 118, 0.25);
+}
+
+.change-badge.negative {
+  background-color: rgba(255, 23, 68, 0.12);
+  color: #ff1744;
+  border: 1px solid rgba(255, 23, 68, 0.25);
+}
+
+/* --- High / Low 24h Ranges --- */
+.price-ranges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.price-range {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: #121212;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.range-label {
+  font-size: 0.75rem;
+  color: #777777;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.range-value {
+  font-size: 1.05rem;
+  color: #e0e0e0;
+  font-weight: 700;
+}
+
+/* --- Chart Section Styling --- */
+.chart-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 20px;
+}
+
+.chart-section h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* --- Stats Grid (Market Cap, Volume, Supplies) --- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  width: 100%;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 18px;
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  border-color: rgba(176, 38, 255, 0.4);
+  background-color: #1c1c1c;
+  box-shadow: 0 0 14px rgba(176, 38, 255, 0.1);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #888888;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* --- Footer Section --- */
+.footer {
+  text-align: center;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  color: #777777;
+  font-size: 0.85rem;
+}
+
+/* --- Responsive Layout for Smaller Screens --- */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .coin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .price-ranges {
+    grid-template-columns: 1fr;
+  }
+}
